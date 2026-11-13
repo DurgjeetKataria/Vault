@@ -322,6 +322,8 @@ function VaultApp() {
   const dropResults = useCallback(() => { resRef.current.forEach((r) => URL.revokeObjectURL(r.url)); setResults([]); }, []);
   useEffect(() => () => resRef.current.forEach((r) => URL.revokeObjectURL(r.url)), []);
   useEffect(() => ls.set("vault.dark", dark), [dark]);
+  // keeps the area behind the page (overscroll / edges) matching the theme
+  useEffect(() => { document.body.style.background = dark ? "#0c1117" : "#f5f7f8"; }, [dark]);
 
   useEffect(() => {
     if (!toast) return undefined;
@@ -549,6 +551,7 @@ function VaultApp() {
 /* ───────────────────────── Styles (scoped to .vt) ───────────────────────── */
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+html,body{margin:0;padding:0}
 .vt{--bg:#f5f7f8;--card:rgba(255,255,255,.76);--solid:#fff;--s2:#f1f3f5;--bd:#e2e6ea;--tx:#1b222c;--mu:#5f6b79;--g:#2f9e76;--gs:#1f7a59;--gl:#eaf6f0;--a:#c68a2e;--as:#956414;--al:#fbf3e4;--r:#c13f3f;--rl:#fbecec;--on:#fff;--g1:rgba(255,255,255,.82);--g2:rgba(255,255,255,.5);--gb:rgba(255,255,255,.75);--btnbg:#fff;--m1:#3b82f6;--m2:#7ef0d4;--m3:#f6c9a8;
  --ac:var(--g);--acs:var(--gs);--acl:var(--gl);--sh:0 1px 2px rgba(27,34,44,.04),0 18px 40px -24px rgba(27,34,44,.22);
  font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.55;color:var(--tx);background:var(--bg);min-height:100vh;position:relative;overflow-x:hidden;transition:background .3s,color .3s}
